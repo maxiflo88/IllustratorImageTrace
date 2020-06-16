@@ -4,7 +4,7 @@
     var files = targetPath.getFiles();
     var images = new Array();
     for (var j = 0; j < files.length; j++){
-        if (files[j].fullName.search('.jpg') != -1) {
+        if (files[j].fullName.search('segm.jpg') != -1) {
             vectorise(files[j], targetPath);
         }
     }
@@ -22,10 +22,12 @@ function vectorise(file, dstDir){
         //High Fidelity Photo
         pic.tracing.tracingOptions.loadFromPreset('16 Colors');
     }
-
+    var art =app.activeDocument.artboards;
+    // alert(sourceDoc.visibleBounds);
     // Export as PNG
+    var numArtboards = sourceDoc.artboards.length;
     var options = new ImageCaptureOptions();
-    for (var i = 0; i < sourceDoc.visibleBounds.lenght; i++) {
+    for (var i = 0; i < numArtboards; i++) {
         options.artBoardClipping = false;
         options.resolution = 300;
         options.antiAliasing = false;
@@ -33,8 +35,6 @@ function vectorise(file, dstDir){
         // options.horizontalScale = 100;
         // options.verticalScale = 100;
         options.transparency = true;
-
-       
         sourceDoc.imageCapture(dstFile, sourceDoc.visibleBounds, options); 
     }
 
@@ -45,7 +45,7 @@ function getNewName(file, dstDir)
 {
     //Create new map in image folder
     newDir=dstDir+'/result';
-    var ext, docName, newName, saveInFile, docName;
+    var ext, docName, newName, saveInFile;
     docName = file.name;
     
     ext = '.png'; // new extension for png file
