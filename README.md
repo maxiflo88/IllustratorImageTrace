@@ -1,2 +1,2 @@
 # IllustratorImageTrace
-From specified directory inside create result directory and image traced png images.
+From specified directory inside create result folder and image traced png images.
